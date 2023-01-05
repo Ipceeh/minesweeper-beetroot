@@ -1,0 +1,82 @@
+#def init_game(*args):
+    ## TODO: change char to actual ceil status
+    ## Matrix:
+    ## {
+    ##        'bomb': True / False
+    ##        'bombs_near' : 0-8
+    ##        'opened': True / False
+    ## }
+    ## Bombs:
+    ## [(1,2), (0,5) ...]
+    ## Asignee: Oksana Stepanova
+   # matrix = [[SOLID_CHAR for i in range(FIELD_SIZE)] for j in range(FIELD_SIZE)]
+    #bombs = [(random.randint(0,FIELD_SIZE-1), random.randint(0,FIELD_SIZE-1)) for i in range(BOMBS_AMOUNT)]
+    #return matrix, bombs, game_status
+
+import random
+from typing import Any
+
+   
+FIELD_SIZE = 8
+BOMBS_AMOUNT = 10
+SOLID_CHAR = 0
+
+def init_game(FIELD_SIZE: int, BOMBS_AMOUNT: int): 
+    SOLID_CHAR = 0 
+    matrix = [[SOLID_CHAR for i in range(FIELD_SIZE)] for j in range(FIELD_SIZE)]
+
+    for i in range (BOMBS_AMOUNT):
+
+        x = random.randint(0,FIELD_SIZE-1)
+        y = random.randint(0,FIELD_SIZE-1)
+
+   
+        matrix[y][x] = 'X'
+
+        if (x >= 0 and x <= 3) and (y >= 0 and y <= 4):
+            if matrix[y][x+1] != 'X':
+                matrix[y][x+1] += 1 # center right
+
+        if (x >= 1 and x <= 4) and (y >= 0 and y <= 4):
+            if matrix[y][x-1] != 'X':
+                matrix[y][x-1] += 1 # center left
+
+        if (x >= 1 and x <= FIELD_SIZE-1) and (y >= 1 and y <= FIELD_SIZE-1):
+            if matrix[y-1][x-1] != 'X':
+                matrix[y-1][x-1] += 1 # top left
+ 
+        if (x >= 0 and x <= FIELD_SIZE-2) and (y >= 1 and y <= FIELD_SIZE-1):
+            if matrix[y-1][x+1] != 'X':
+                matrix[y-1][x+1] += 1 # top right
+
+        if (x >= 0 and x <= FIELD_SIZE-1) and (y >= 1 and y <= FIELD_SIZE-1):
+            if matrix[y-1][x] != 'X':
+                matrix[y-1][x] += 1 # top center
+ 
+        if (x >=0 and x <= FIELD_SIZE-2) and (y >= 0 and y <= FIELD_SIZE-2):
+            if matrix[y+1][x+1] != 'X':
+                matrix[y+1][x+1] += 1 # bottom right
+
+        if (x >= 1 and x <= FIELD_SIZE-1) and (y >= 0 and y <= FIELD_SIZE-2):
+            if matrix[y+1][x-1] != 'X':
+                matrix[y+1][x-1] += 1 # bottom left
+
+        if (x >= 0 and x <= FIELD_SIZE-1) and (y >= 0 and y <= FIELD_SIZE-2):
+            if matrix[y+1][x] != 'X':
+                matrix[y+1][x] += 1 # bottom center
+
+   
+    for i in matrix:
+        print("\t ".join(str(cell) for cell in i))
+        print("")
+      
+    return matrix
+
+
+init_game(8,10)
+
+
+    #GameStatus = True
+    #while GameStatus:
+
+    
