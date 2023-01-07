@@ -1,5 +1,6 @@
-#def init_game(*args):
-    ## TODO: change char to actual ceil status
+import random
+from typing import Any
+
     ## Matrix:
     ## {
     ##        'bomb': True / False
@@ -8,35 +9,31 @@
     ## }
     ## Bombs:
     ## [(1,2), (0,5) ...]
-    ## Asignee: Oksana Stepanova
-   # matrix = [[SOLID_CHAR for i in range(FIELD_SIZE)] for j in range(FIELD_SIZE)]
-    #bombs = [(random.randint(0,FIELD_SIZE-1), random.randint(0,FIELD_SIZE-1)) for i in range(BOMBS_AMOUNT)]
-    #return matrix, bombs, game_status
 
-import random
-from typing import Any
-   
-FIELD_SIZE = 8
-BOMBS_AMOUNT = 10
-SOLID_CHAR = 0
-
+# lower case arguments for functions
 def init_game(FIELD_SIZE: int, BOMBS_AMOUNT: int): 
+    # No need in solid_char, we don't track visualizing config
     SOLID_CHAR = 0 
     matrix = [[SOLID_CHAR for i in range(FIELD_SIZE)] for j in range(FIELD_SIZE)]
     bombs = []
     for i in range (BOMBS_AMOUNT):
 
-        x = random.randint(0,FIELD_SIZE-1)
-        y = random.randint(0,FIELD_SIZE-1)
+        
 
         
+        # Check if we have bomb with the same coords (while)
+        # duplicate = True
+        # while duplicate:
+        #     x = random.randint(0,FIELD_SIZE-1)
+        #     y = random.randint(0,FIELD_SIZE-1)  
+        #     bomb = (y,x)
+        #     duplicate = bomb in bombs
+        # bombs.append(tuple((y, x)))
         
-        bombs.append(tuple((y, x)))
-        
-   
+        # Save in declared format
         matrix[y][x] = '*'
         
-
+        # Create function `count_neirbohood_bombs`
         if (x >= 0 and x <= 3) and (y >= 0 and y <= 4):
             if matrix[y][x+1] != '*':
                 matrix[y][x+1] += 1 # center right
@@ -69,18 +66,33 @@ def init_game(FIELD_SIZE: int, BOMBS_AMOUNT: int):
             if matrix[y+1][x] != '*':
                 matrix[y+1][x] += 1 # bottom center
 
+
+        # for i in range(FIELD_SIZE):
+        #     for j in range(FIELD_SIZE):
+        #         current_cell = (i,j)
+        #         neirbourhood_cells = [
+        #             (i-1,j-1), (i-1,j), (i,j-1), (i+1,j+1), (i+1,j), (i,j+1), (i+1,j-1), (i-1,j+1)
+        #         ]
+        #         neirbourhood_cells = [(x,y) for x,y in neirbourhood_cells if x >= 0 and x <= FIELD_SIZE-1 and y >= 0 and y <= FIELD_SIZE-1]
+
+
+        
    
-    for i in matrix:
-        print("\t ".join(str(cell) for cell in i))
-        print("")
+    # for i in matrix:
+    #     print("\t ".join(str(cell) for cell in i))
+    #     print("")
 
     
       
-    return matrix, print(bombs)
+    return matrix, bombs
 
 
+if __name__ == '__main__':
+    FIELD_SIZE = 8
+    BOMBS_AMOUNT = 10
+    SOLID_CHAR = 0
 
-init_game(8,10)
+    matrix, bombs = init_game(8,10)
 
 
    
