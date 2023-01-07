@@ -85,18 +85,19 @@ def open_field_part(*args) -> None:
     ...
 
 
-def execute_open_command(ceil):
+def execute_open_command(matrix:list[list], cell:tuple[int,int]) -> list[list]:
     ## Asignee: Denis Zamaratsky
-    if ceil.bombs_near == 0:
-        open_ceil(ceil)
+    if cell.bombs_near == 0:
+        open_ceil(matrix, cell)
     else:
-        open_field_part()
+        open_field_part(matrix, cell)
+    return matrix
 
-def open_ceil(matrix, ceil:tuple[int, int]) -> None:
+def open_ceil(matrix, ceil:tuple[int, int]) -> list[list]:
     ## Asignee: Denis Zamaratsky
     ...
 
-def mark_as_mine(matrix, ceil:tuple[int, int]) -> None:
+def mark_as_mine(matrix, ceil:tuple[int, int]) -> list[list]:
     ## Asignee:  Denis Zamaratsky
     ...
 
