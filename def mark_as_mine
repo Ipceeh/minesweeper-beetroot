@@ -1,0 +1,8 @@
+def mark_as_mine(matrix, cell:tuple[int, int]) -> list[list]:
+        cell_values = matrix[cell[1]][cell[0]]
+        if cell_values['opened']:
+            raise ValueError(f'Cannot add flag, cell is already open')
+            if [cell[1]][cell[0]] in mark_as_mine:
+                    clear()
+            print("Flag already set")
+            return matrix
